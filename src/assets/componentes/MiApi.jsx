@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 const MiApi = ({ inputSearch }) => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState([])
   // usseEffect 1 sola llamada
   useEffect(() => {
     getData()
@@ -12,9 +12,9 @@ const MiApi = ({ inputSearch }) => {
     const items = await res.json()
     setData(items)
   }
-  const valid = ({ data, inputSearch }) => {
+  const valid = ([data], inputSearch) => {
     console.log('valor digitado', inputSearch)
-    let results = {}
+    let results = []
     if (!inputSearch) {
       results = data
       console.log('en blanco')
@@ -26,11 +26,11 @@ const MiApi = ({ inputSearch }) => {
       console.log('valid', results)
     }
   }
-  valid({ data, inputSearch })
+  valid([data], inputSearch)
   // console.log('app input', inputSearch)
   return (
     <>
-      {data?.data?.map((item) => {
+      {results?.results?.map((item) => {
         return (
           <React.Fragment key={item.id}>
             <Accordion defaultActiveKey='0'>
