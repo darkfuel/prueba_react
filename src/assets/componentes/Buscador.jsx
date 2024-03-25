@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import React from 'react'
 
-function NavSearch () {
+function NavSearch ({ inputSearch, setInputSearch }) {
   return (
     <Navbar expand='lg' className='bg-body-tertiary'>
       <Container fluid>
@@ -23,8 +23,9 @@ function NavSearch () {
               placeholder='Search'
               className='me-2'
               aria-label='Search'
+              value={inputSearch}
+              onChange={e => setInputSearch(e.target.value)}
             />
-            <Button variant='outline-primary'>Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>
