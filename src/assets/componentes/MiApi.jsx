@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react'
+import Accordion from 'react-bootstrap/Accordion'
 const MiApi = () => {
-  const [data, setData] = useState('')
+  const [data, setData] = useState({})
+  // usseEffect 1 sola llamada
   useEffect(() => {
     getData()
   }, [])
 
   const getData = async () => {
-    const datos = await fetch('https://jsonplaceholder.typicode.com/users')
-    const album = await datos.json()
-    console.log(album)
-    setData(album)
+    const res = await fetch('https://dogapi.dog/api/v2/breeds')
+    const items = await res.json()
+    setData(items)
   }
-
   return (
     <>
-      <ul>
-        {
-            [data].map(item => (
-              <li key={item.id}>{item.name}</li>
-            ))
-        }
-      </ul>
+      {data?.data?.map((item) => {
+        console.log(item)
+        return (
+          <React.Fragment key={item.id}>
+            <Accordion defaultActiveKey='0'>
+              <Accordion.Item eventKey='0'>
+                <Accordion.Header>{item.attributes.name}</Accordion.Header>
+                <Accordion.Body>{item.attributes.description}</Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </React.Fragment>
+        )
+      })}
     </>
   )
 }
