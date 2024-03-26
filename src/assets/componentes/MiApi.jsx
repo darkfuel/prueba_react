@@ -13,23 +13,19 @@ const MiApi = ({ inputSearch }) => {
     setData(items)
   }
   const valid = () => {
-    // console.log('valor digitado', inputSearch)
-    let results = []
     if (!inputSearch) {
-      return (results = data)
+      return data.data
     } else {
-      return (results = data.data.filter((dato) =>
-        dato.attributes.name.toLowerCase().includes(inputSearch.toLowerCase())))
+      return data.data.filter((dato) =>
+        dato.attributes.name.toLowerCase().includes(inputSearch.toLowerCase()))
     }
   }
   const nArray = valid(data, inputSearch)
-  console.log('app filtr', [nArray])
-  console.log('app input', data)
-
+  // pintar items
   return (
     <>
-      {nArray?.data?.map((item) => {
-        console.log(item)
+      {nArray?.map((item) => {
+        // console.log(item)
         return (
           <React.Fragment key={item.id}>
             <Accordion defaultActiveKey='0'>
