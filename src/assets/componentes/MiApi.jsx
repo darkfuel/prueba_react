@@ -12,25 +12,24 @@ const MiApi = ({ inputSearch }) => {
     const items = await res.json()
     setData(items)
   }
-  const valid = ([data], inputSearch) => {
-    console.log('valor digitado', inputSearch)
+  const valid = () => {
+    // console.log('valor digitado', inputSearch)
     let results = []
     if (!inputSearch) {
-      results = data
-      console.log('en blanco')
+      return (results = data)
     } else {
-      console.log('valor en MiApi', data.data)
-      results = data.data.filter((dato) =>
-        dato.attributes.name.toLowerCase().includes(inputSearch.toLowerCase()))
-      console.log('escrito')
-      console.log('valid', results)
+      return (results = data.data.filter((dato) =>
+        dato.attributes.name.toLowerCase().includes(inputSearch.toLowerCase())))
     }
   }
-  valid([data], inputSearch)
-  // console.log('app input', inputSearch)
+  const nArray = valid(data, inputSearch)
+  console.log('app filtr', [nArray])
+  console.log('app input', data)
+
   return (
     <>
-      {results?.results?.map((item) => {
+      {nArray?.data?.map((item) => {
+        console.log(item)
         return (
           <React.Fragment key={item.id}>
             <Accordion defaultActiveKey='0'>
