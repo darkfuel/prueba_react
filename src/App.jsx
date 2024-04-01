@@ -6,7 +6,6 @@ import NavSearch from './assets/componentes/Buscador'
 
 function App () {
   const [inputSearch, setInputSearch] = useState('')
-  // console.log(inputSearch)
   return (
     <>
       <NavSearch inputSearch={inputSearch} setInputSearch={setInputSearch} />

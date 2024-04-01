@@ -10,22 +10,32 @@ const MiApi = ({ inputSearch }) => {
   const getData = async () => {
     const res = await fetch('https://dogapi.dog/api/v2/breeds')
     const items = await res.json()
-    setData(items)
+    setData(items.data)
   }
   const valid = () => {
     if (!inputSearch) {
-      return data.data
+      return data
     } else {
-      return data.data.filter((dato) =>
+      return data.filter((dato) =>
         dato.attributes.name.toLowerCase().includes(inputSearch.toLowerCase()))
     }
   }
   const nArray = valid(data, inputSearch)
+  nArray.sort((a, b) => {
+    const nameA = a.attributes.name.toLowerCase()
+    const nameB = b.attributes.name.toLowerCase()
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  })
   // pintar items
   return (
     <>
       {nArray?.map((item) => {
-        // console.log(item)
         return (
           <React.Fragment key={item.id}>
             <Accordion defaultActiveKey='0'>
